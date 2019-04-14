@@ -1,0 +1,75 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://GameScenes/Game/Game.gd" type="Script" id=1]
+[ext_resource path="res://GameScenes/Battle/Battle.tscn" type="PackedScene" id=2]
+[ext_resource path="res://GameScenes/Battle/Audio/Shuffle or Boogie.wav" type="AudioStream" id=3]
+[ext_resource path="res://GameScenes/BattleResults/Fade.gd" type="Script" id=4]
+[ext_resource path="res://GameScenes/BattleResults/Results.tscn" type="PackedScene" id=5]
+
+[sub_resource type="Animation" id=1]
+resource_name = "fade_from_black"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "fade_to_black"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CanvasLayer/Results:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="Game" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="Battle" parent="." instance=ExtResource( 2 )]
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+autoplay = true
+
+[node name="Fade" type="CanvasModulate" parent="."]
+script = ExtResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Fade"]
+anims/fade_from_black = SubResource( 1 )
+anims/fade_to_black = SubResource( 2 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Fade"]
+layer = 2
+
+[node name="Results" parent="Fade/CanvasLayer" instance=ExtResource( 5 )]
+modulate = Color( 1, 1, 1, 0 )
+
+[connection signal="battle_ended" from="Battle" to="Fade" method="_on_Battle_battle_ended"]
