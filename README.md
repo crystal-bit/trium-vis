@@ -2,6 +2,10 @@
 
 ![Trium Vis](https://user-images.githubusercontent.com/6860637/56095982-1c2b6c00-5eda-11e9-9ff2-c9c266002e92.png)
 
+<h6 align="right">
+  <em>Art made by Hairic</em>
+</h6>
+
 **Trium Vis** is a turn based card game.
 
 This repository is forked from [my Triple Triad reimplementation](https://github.com/crystal-bit/triple-triad-godot).
@@ -55,7 +59,8 @@ the same time: it's better to not waste anyone's time.
 
 ## Licensing
 
-...
+- **Source Code**: [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)
+- **Assets**: [CC-BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/legalcode)
 
 ## Thanks
 
