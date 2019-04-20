@@ -11,20 +11,26 @@ enum {
 signal battle_ended
 
 
-var rules setget set_rules  # Game node updates this variable
+var rules = {} setget set_rules  # Game node updates this variable
 
-
+func _init():
+	print("Battle ready")
+	
 func set_rules(value):
+	""" Initializes the rules. Should be called once before the battle starts """
 	rules = value
-	print(rules)
 	
 	if rules.get("Open") == false:
 		# Update AI cards texture to show the back side of the card
 		for card_container in $Player2Cards.get_children():
 			if card_container is Control:
 				var card = card_container.get_child(0)
-				print(card.covered)
 				card.covered = true
+	
+	if rules.get("Random") == false:
+		$Player1Cards.randomize_cards()
+		# $Player2Cards.randomize_cards()
+
 
 func _on_Field_match_ended():
 	var match_result = _get_match_result()

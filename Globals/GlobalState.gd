@@ -7,6 +7,7 @@ var matches_stats = {
 	"drawn": 0
 } setget set_matches_stats, get_matches_stats
 
+var match_rules = {}
 
 signal matches_stats_changed
 
@@ -33,3 +34,8 @@ func load_data():
 func save_data():
 	# TODO: Save data to a save file
 	pass
+	
+
+func get_cards_count():
+	""" TODO: it should be derived from the number of items in the cards file data """
+	return 8

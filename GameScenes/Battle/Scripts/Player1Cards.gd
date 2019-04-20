@@ -7,25 +7,24 @@ extends VBoxContainer
 #   - Player2Cards.gd handles the computer AI
 
 var selected_card_index
-var CARDS_COUNT = 8  # TODO: make this value global in the Globals singleton and make it dynamic, eg: it should be derived from the number of items in the cards file data
+var CARDS_COUNT = GlobalState.get_cards_count()
+export var ai_enabled = false
+onready var battle: Node = get_parent()
 
 func _ready():
+	print("Player1 ready")
 	# set an initial selected card
-	set_current_selected_card(0)	
-	# update the seed
-	randomize()
-	# randomize Player cards
-	randomize_cards()
-
+	set_current_selected_card(0)
+	
 
 func get_card_container_at(index):
-	""" Get a Card node given an integer index
-	"""
+	""" Get a Card node given an integer index """
 	assert index <= get_card_count() - 1
 	var card_container = get_child(index)
 	return card_container
 
 func get_card_count():
+	""" Get cards in the player hand """
 	return get_child_count() - 1  # 1 node is the Tween node
 	
 func set_current_selected_card(index):
@@ -65,6 +64,8 @@ func move_left(card_container, offset):
 	$Tween.start()
 
 func randomize_cards():
+	# update the seed
+	randomize()
 	""" Randomize cards in the Player hand """
 	# for each child
 	for child in get_children():

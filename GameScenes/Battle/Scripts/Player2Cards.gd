@@ -7,7 +7,7 @@ export(NodePath) var field_path
 
 onready var field = get_node(field_path)
 
-var CARDS_COUNT = 8
+var CARDS_COUNT = GlobalState.get_cards_count()
 
 signal turn_finished
 
@@ -44,8 +44,7 @@ func _process(delta):
 		emit_signal("turn_finished", rand_position)
 	
 func get_card_container_at(index):
-	""" Get a Card node given an integer index
-	"""
+	""" Get a Card node given an integer index """
 	assert index <= get_card_count() - 1
 	var card_container = get_child(index)
 	return card_container
