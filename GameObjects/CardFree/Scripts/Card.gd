@@ -28,7 +28,7 @@ func _ready():
 	for c in cards:
 		if c.id == card_id:
 			card_data = c
-	card.group = card_data["group"]
+	card.group = card_id / 8  # card_data["group"]
 	card.group_index = card_data["group_index"]
 	card.name = card_data["name"]
 	card.attributes = {

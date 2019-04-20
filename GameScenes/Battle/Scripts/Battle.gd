@@ -27,7 +27,7 @@ func set_rules(value):
 				var card = card_container.get_child(0)
 				card.covered = true
 	
-	if rules.get("Random") == false:
+	if rules.get("Random") == true:
 		$Player1Cards.randomize_cards()
 		# $Player2Cards.randomize_cards()
 

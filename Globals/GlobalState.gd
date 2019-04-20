@@ -38,4 +38,4 @@ func save_data():
 
 func get_cards_count():
 	""" TODO: it should be derived from the number of items in the cards file data """
-	return 8
+	return 15

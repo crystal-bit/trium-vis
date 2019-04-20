@@ -73,7 +73,7 @@ func randomize_cards():
 		if "Container" in child.name:
 			# get the Card node
 			var card = child.get_child(0)
-			card.card_id = randi() % (CARDS_COUNT )  # an integer value between 0 and CARDS_COUNT
+			card.card_id = randi() % (CARDS_COUNT)  # an integer value between 0 and CARDS_COUNT
 			card._ready()
 
 func _on_CardSelected_place_card(card_index, field_position):

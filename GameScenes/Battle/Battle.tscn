@@ -151,7 +151,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Player1Cards" type="VBoxContainer" parent="."]
-editor/display_folded = true
 anchor_bottom = 1.0
 margin_left = 50.0
 margin_top = 64.0
