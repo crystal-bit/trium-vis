@@ -91,9 +91,31 @@ func move_left(card_container, offset):
 func get_random_card_container():
 	# TODO: improve this
 	# It is a naive implementation, always gets the first card
-	return get_child(randi() % get_card_count())
+	var card_container = get_child(randi() % get_card_count())
+	while card_container.get_child_count() == 0:
+		card_container = get_child(randi() % get_card_count())
+	return card_container
+
+
+func reset_hand():	
+	for child in get_children():
+		if "Container" in child.name:
+			# if there is no card in the card container
+			if child.get_child_count() == 0:
+				var card = load('res://GameObjects/CardFree/Card.tscn')
+				var card_instance = card.instance()
+				card_instance.card_id = 1
+				card_instance.card.id = 1
+				card_instance._ready()
+				card_instance.set_owned_by_player(false)
+				# TODO update back texture before uncommenting this line
+				# card_instance.set_covered(!GlobalState.match_rules.get("Open"))
+				card_instance.set_covered(false)
+				child.add_child(card_instance)
 
 func randomize_cards():
+	# update the seed
+	randomize()
 	""" Randomize cards in the Player hand """
 	# for each child
 	for child in get_children():
@@ -101,7 +123,7 @@ func randomize_cards():
 		if "Container" in child.name:
 			# get the Card node
 			var card = child.get_child(0)
-			card.card_id = randi() % CARDS_COUNT
+			card.card_id = randi() % (CARDS_COUNT)  # an integer value between 0 and CARDS_COUNT
 			card._ready()
 
 func _on_CardSelected_place_card(a, b):

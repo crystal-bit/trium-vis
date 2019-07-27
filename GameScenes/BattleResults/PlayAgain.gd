@@ -1,4 +1,7 @@
 extends Label
 
+signal play_selected
+
 func callback():
-	SceneManager.goto_scene("res://GameScenes/Game/Game.tscn")
+	emit_signal("play_selected")
+	# SceneManager.goto_scene("res://GameScenes/Game/Game.tscn")

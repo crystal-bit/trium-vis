@@ -20,6 +20,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("CanvasLayer/Results:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "fade_to_black"
@@ -73,3 +85,4 @@ layer = 2
 modulate = Color( 1, 1, 1, 0 )
 
 [connection signal="battle_ended" from="Battle" to="Fade" method="_on_Battle_battle_ended"]
+[connection signal="play_again" from="Fade/CanvasLayer/Results" to="." method="_on_Results_play_again"]

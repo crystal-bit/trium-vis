@@ -7,16 +7,13 @@ export(int, 0, 4) var selected_card_index = 0  # index, strarting from the top
 export(NodePath) var cards_container_node_path
 
 onready var selection_pointer = get_parent().get_parent()
-var cards_container
+var player_cards
 
 # do not use _ready() because it's called even if you use set_process(false) from the parent node,
 # breaking the State pattern
-func init(starting_index):
-	# TODO: delete this line and update the code to update selection_pointer
-	# to the nearest card from the last selected one
+func init(starting_index):	
+	player_cards = get_node(cards_container_node_path)
 	selected_card_index = 0
-	
-	cards_container = get_node(cards_container_node_path)
 	if starting_index != null:
 		selected_card_index = starting_index
 	_point_at_card(_get_card_at_index(selected_card_index))
@@ -26,7 +23,7 @@ func _process(delta):
 	# store current selected card index
 	var old_card_index = selected_card_index
 	# get the number of remaining cards
-	var remaining_cards = cards_container.get_card_count()
+	var remaining_cards = player_cards.get_card_count()
 	if Input.is_action_just_pressed("ui_up"):
 		# clamp the value
 		selected_card_index = max(0, selected_card_index - 1)
@@ -51,4 +48,4 @@ func _point_at_card(card):
 	selection_pointer.rect_position.y = card.rect_position.y + 150
 
 func _get_card_at_index(card_index):
-	return cards_container.get_card_container_at(card_index)
+	return player_cards.get_card_container_at(card_index)

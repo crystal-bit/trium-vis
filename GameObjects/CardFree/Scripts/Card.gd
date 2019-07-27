@@ -23,6 +23,7 @@ enum ELEMENTS {
 var card = {}
 
 func _ready():
+	card = {}
 	var card_data
 	var cards = _load_cards_data_from_json()
 	for c in cards:
@@ -43,6 +44,7 @@ func _ready():
 	$DebugLabel.text = card.name
 	card.element = ELEMENTS.NONE
 	card.front_texture = _get_atlas_texture_by_group_and_index(card.group, card.group_index)
+	# TODO: update back texture
 	card.back_texture = _get_atlas_texture_by_group_and_index(13, 6)
 	if covered:
 		$Attributes.hide()

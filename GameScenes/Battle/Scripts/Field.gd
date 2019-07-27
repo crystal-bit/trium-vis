@@ -8,16 +8,17 @@ var cards_played = 0
 func add_card_at_position(card_container, field_position):
 	# https://davcri.github.io/posts/godot-reparent-node/
 	var card = card_container.get_child(0)
-	card_container.remove_child(card)
-	# free memory
-	card_container.queue_free()	
 	# reset card offset
 	card.rect_position = Vector2()
+	card_container.remove_child(card)
+	# free memory
+	#card_container.queue_free()
+	print(card)
 	get_container_by_vector(field_position).add_child(card)
 	# increase played cards counter
 	cards_played += 1
 	if cards_played == 9:
-		emit_signal("match_ended")
+		emit_signal("match_ended", get_parent().rules)
 
 func get_random_empty_container():  # TODO: change name! get_vector_...
 	assert cards_played < 9
@@ -54,4 +55,9 @@ func get_card_containers_matrix():
 		[$Container7, $Container8, $Container9]
 	]
 	return matrix
+
+func reset_board():
+	for card_container in get_card_containers():
+		if card_container.get_child_count() > 0:
+			card_container.remove_child(card_container.get_child(0))
 	

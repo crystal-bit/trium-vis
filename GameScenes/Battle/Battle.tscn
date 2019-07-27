@@ -50,9 +50,6 @@ __meta__ = {
 editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="CardsmatLeft" type="TextureRect" parent="BackroundTextures"]
 margin_right = 1024.0
@@ -151,6 +148,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Player1Cards" type="VBoxContainer" parent="."]
+editor/display_folded = true
 anchor_bottom = 1.0
 margin_left = 50.0
 margin_top = 64.0
@@ -349,12 +347,13 @@ expand = true
 script = ExtResource( 20 )
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+editor/display_folded = true
 stream = ExtResource( 21 )
 autoplay = true
 
 [connection signal="match_ended" from="Field" to="." method="_on_Field_match_ended"]
-[connection signal="turn_finished" from="Player2Cards" to="GameLogic/SelectionPointer" method="_on_Player2Cards_turn_finished"]
 [connection signal="turn_finished" from="Player2Cards" to="GameLogic" method="_on_Player2Cards_turn_finished"]
+[connection signal="turn_finished" from="Player2Cards" to="GameLogic/SelectionPointer" method="_on_Player2Cards_turn_finished"]
 [connection signal="player_captured_a_card" from="GameLogic" to="Scores" method="_on_GameLogic_player_captured_a_card"]
 [connection signal="card_selected" from="GameLogic/SelectionPointer/State/SelectingCard" to="GameLogic/SelectionPointer" method="_on_SelectingCard_card_selected"]
 [connection signal="new_card_pointed" from="GameLogic/SelectionPointer/State/SelectingCard" to="Player1Cards" method="_on_SelectingCard_new_card_pointed"]

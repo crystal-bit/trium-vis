@@ -9,6 +9,8 @@ onready var menu_pointer: Node = $CenterContainer/VBoxContainer/VBoxContainer/Me
 
 var result: String = "win" setget set_result, get_result
 
+signal play_again
+signal exit
 
 func _ready():
 	_update_visible_texture()
@@ -69,3 +71,11 @@ func _set_stats():
 	lost.text = str(matches_stats["lost"])
 	total.text = str(matches_stats["won"] + matches_stats["drawn"] + matches_stats["lost"])
 	
+
+func _on_PlayAgain_play_selected():
+	emit_signal("play_again")
+	process_input(false)
+
+
+func _on_Exit_exit_selected():
+	emit_signal("exit")

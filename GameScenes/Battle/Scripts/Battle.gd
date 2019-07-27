@@ -13,9 +13,7 @@ signal battle_ended
 
 var rules = {} setget set_rules  # Game node updates this variable
 
-func _init():
-	print("Battle ready")
-	
+
 func set_rules(value):
 	""" Initializes the rules. Should be called once before the battle starts """
 	rules = value
@@ -32,7 +30,7 @@ func set_rules(value):
 		# $Player2Cards.randomize_cards()
 
 
-func _on_Field_match_ended():
+func _on_Field_match_ended(rules_used):
 	var match_result = _get_match_result()
 	# update global values
 	if match_result == WIN:
@@ -51,3 +49,17 @@ func _get_match_result() -> int:
 		return LOSE
 	else:
 		return DRAW
+		
+
+func init():
+	$Player1Cards.reset_hand()
+	$Player1Cards.randomize_cards()
+	$Player2Cards.reset_hand()
+	#$Player2Cards.randomize_cards()
+	
+	$GameLogic/SelectionPointer._change_state($GameLogic/SelectionPointer/State/SelectingCard, 0)
+	
+	$Field.reset_board()
+	
+	# TODO: add code to decide who is going to play first
+	
